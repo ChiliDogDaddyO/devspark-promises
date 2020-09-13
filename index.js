@@ -1,7 +1,8 @@
 function http(url, method) {
   var promise = new Promise(function (resolve, reject) {
+    // throw new Error('error in promise')
     setTimeout(function () {
-      var data = 'the answer'
+      var data
       if (data) {
         resolve(data)
       } else {
@@ -15,7 +16,8 @@ function http(url, method) {
 http('http://google.com', 'GET')
   .then(function (data) {
     console.log(data)
+    throw new Error('error in promise.then')
   })
   .catch(function (err) {
-    console.log(err)
+    console.log('Catch:', err)
   })
