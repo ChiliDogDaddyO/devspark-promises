@@ -1,21 +1,21 @@
-function http(url, method, successCallbacck, errorHandler) {
-  setTimeout(function () {
-    var data = 'the answer'
-    if (data) {
-      successCallbacck(data)
-    } else {
-      errorHandler('No data')
-    }
-  }, 1000)
+function http(url, method) {
+  var promise = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      var data = 'the answer'
+      if (data) {
+        resolve(data)
+      } else {
+        reject('No data')
+      }
+    }, 1000)
+  })
+  return promise
 }
 
-http(
-  'http://google.com',
-  'GET',
-  function (data) {
+http('http://google.com', 'GET')
+  .then(function (data) {
     console.log(data)
-  },
-  function (err) {
+  })
+  .catch(function (err) {
     console.log(err)
-  }
-)
+  })
